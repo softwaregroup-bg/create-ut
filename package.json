@@ -1,0 +1,31 @@
+{
+  "name": "create-ut",
+  "version": "1.0.0",
+  "description": "Tool for creating UT microservices and applications",
+  "main": "index.js",
+  "scripts": {},
+  "dependencies": {
+    "commander": "3.0.2",
+    "package-json": "^6.5.0",
+    "ut-form-jsonschema": "^7.1.4",
+    "ut-log": "^6.6.1",
+    "glob": "7.1.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/softwaregroup-bg/create-ut.git"
+  },
+  "keywords": [
+    "Create UT",
+    "ut",
+    "ut boilerplate",
+    "ut setup",
+    "ut app"
+  ],
+  "author": "Software Group",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/softwaregroup-bg/create-ut/issues"
+  },
+  "homepage": "https://github.com/softwaregroup-bg/create-ut#readme"
+}
