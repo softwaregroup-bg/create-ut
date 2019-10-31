@@ -1,4 +1,4 @@
-# ut-create
+# create-ut
 
 Tool for creating UT microservices and applications
 
