@@ -26,7 +26,7 @@ async function run() {
             .usage('<template> <project-directory>')
             .action((tmpl, prjDir) => {
                 template = tmpl;
-                dir = prjDir + Date.now();
+                dir = prjDir;
                 root = path.join(process.cwd(), dir);
             })
             .parse(process.argv);
@@ -70,6 +70,7 @@ async function run() {
             });
         });
 
+        console.log(`${template} based project has been successfully created in folder ${root}!`);
     } catch(e) {
         console.error(e);
         if (root && fs.existsSync(root)) {
