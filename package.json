@@ -3,7 +3,26 @@
   "version": "1.0.0",
   "description": "Tool for creating UT microservices and applications",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "lint": "ut-lint .",
+    "release": "ut-release",
+    "changelog": "ut-changelog",
+    "check": "ut-check",
+    "cover": "ut-cover-parallel",
+    "lint-js": "ut-lint-js .",
+    "postpublish": "ut-postpublish",
+    "postversion": "ut-postversion",
+    "precommit": "ut-precommit",
+    "precover": "ut-precover",
+    "prepublish": "ut-prepublish",
+    "prepush": "ut-prepush",
+    "pretest": "ut-pretest",
+    "preversion": "ut-preversion",
+    "test": "ut-test-parallel",
+    "version": "ut-version",
+    "jenkins": "ut-jenkins",
+    "gitlab": "ut-gitlab"
+  },
   "dependencies": {
     "commander": "4.0.0",
     "commander-remaining-args": "1.2.0",
@@ -15,7 +34,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/softwaregroup-bg/create-ut.git"
+    "url": "git@github.com:softwaregroup-bg/create-ut.git"
   },
   "keywords": [
     "Create UT",
@@ -25,7 +44,7 @@
     "ut app"
   ],
   "author": "Software Group",
-  "license": "ISC",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/softwaregroup-bg/create-ut/issues"
   },
