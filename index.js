@@ -15,6 +15,25 @@ const log = new UtLog({
     streams: []
 }).createLog('info', {name: 'create-ut', context: 'create-ut'});
 
+function exec(command, args, options) {
+    const res = childProcess.spawnSync(command, args, options);
+
+    if (res.stderr) console.error(res.stderr.toString().trim());
+
+    if (res.error) {
+        console.error('git', 'clone', url, dir, '=>');
+        console.error(res.error);
+        return process.exit(1);
+    }
+
+    if (res.status !== 0) {
+        console.error('git', 'clone', url, dir, '=>', res.status);
+        return process.exit(1);
+    }
+
+    return res.stdout;
+}
+
 async function run() {
     let template, dir, root;
 
@@ -22,10 +41,23 @@ async function run() {
         const program = new commander.Command(name)
             .version(version)
             .description('UT generator')
-            .arguments('<template> <project-directory>')
-            .usage('<template> <project-directory>')
-            .action((tmpl, prjDir) => {
-                template = tmpl;
+            .arguments('[template] [project-directory]')
+            .allowUnknownOption()
+            .usage('[template] [project-directory]')
+            .action((tmpl = 'app', prjDir = '.') => {
+                const [prefix] = tmpl.split('-');
+                switch(prefix) {
+                    case 'ms':
+                    case 'service':
+                        tmpl = tmpl.replace(prefix, 'microservice');
+                        break;
+                    case 'port':
+                        tmpl = tmpl.replace(prefix, 'port-template');
+                        break;
+                    default:
+                        break;
+                }
+                template = 'ut-' + tmpl;
                 dir = prjDir;
                 root = path.join(process.cwd(), dir);
             })
@@ -33,20 +65,17 @@ async function run() {
 
         const { repository: { url } } = await packageJson(template, {registryUrl: 'https://nexus.softwaregroup.com/repository/npm-all/'});
 
-        const ret = childProcess.spawnSync('git', ['clone', url, dir], {stdio: 'inherit'});
-
-        if (ret.stderr) console.error(ret.stderr.toString().trim());
-
-        if (ret.error) {
-            console.error('git', 'clone', url, dir, '=>');
-            console.error(ret.error);
-            process.exit(1);
-        } else if (ret.status !== 0) {
-            console.error('git', 'clone', url, dir, '=>', ret.status);
-            process.exit(1);
-        }
+        exec('git', ['clone', url, dir], {stdio: 'inherit'});
 
         const create = require(path.join(root, 'create.js'));
+
+        if (create.schema.properties.userName) {
+            const userEmail = exec('git', ['config', '--get', 'user.email'], {stdio: 'pipe', encoding: 'utf-8'});
+            create.formSchema = {
+                ...create.formSchema,
+                userName: userEmail.split('@')[0]
+            },
+        }
 
         const {url: { href }, id} = await edit({log});
 
@@ -61,11 +90,14 @@ async function run() {
         const rules = rename(data);
 
         rules.forEach(({files, replace}) => {
-            const list = glob.sync(files[0] === path.sep ? files : path.sep + files, { root });
+            const list = glob.sync(/^[^/\\].*/.test(files) ? '/' + files : files, { root });
             list.forEach(file => {
                 const fileContent = fs.readFileSync(file, 'utf8');
-                if (Array.isArray(replace[0])) replace.forEach(([regExp, value]) => fileContent.replace(regExp, value))
-                else fileContent.replace(replace[0], replace[1]);
+                // [regExp1, value1] or [regExp1, value1, regExp2, value2] or [[regExp1, value1], [regExp2, value2]]
+                replace
+                    .flat()
+                    .reduce((all, item, i) => all.concat(i % 2 ? [[all.pop(), item]] : item), [])
+                    .forEach(([regExp, value]) => fileContent.replace(regExp, value))
                 fs.writeFileSync(file, fileContent);
             });
         });
@@ -73,15 +105,6 @@ async function run() {
         console.log(`${template} based project has been successfully created in folder ${root}!`);
     } catch(e) {
         console.error(e);
-        if (root && fs.existsSync(root)) {
-            (function unlinkSync(folder) {
-                fs.readdirSync(folder).forEach(subFolder => {
-                    const subPath = path.join(folder, subFolder);
-                    return fs.lstatSync(subPath).isDirectory() ? unlinkSync(subPath) : fs.unlinkSync(subPath)
-                });
-                fs.rmdirSync(folder);
-            })(root);
-        };
         process.exit(1);
     }
 }

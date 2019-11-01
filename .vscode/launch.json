@@ -13,7 +13,7 @@
             "env": {
                 "NODE_PATH": "dev"
             },
-            "args": ["standard-service-content", "x"],
+            "args": ["api", "test", "--x"],
             "outputCapture": "std"
         }
     ]
