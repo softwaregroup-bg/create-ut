@@ -114,7 +114,7 @@ async function run() {
             });
         });
 
-        // exec('git', ['remote', 'set-url', 'origin', 'git@xxx:yyy/zzz.git'], {stdio: 'inherit'})
+        exec('git', ['remote', 'set-url', 'origin', url.replace(template, path.basename(root))], {stdio: 'inherit', cwd: root});
 
         console.log(`${template} based project has been successfully created in folder ${root}`);
     } catch (e) {
