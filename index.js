@@ -1,3 +1,4 @@
+/* eslint no-console:0, no-process-exit:0 */
 const commander = require('commander');
 const { name, version } = require('./package.json');
 const remainingArgs = require('commander-remaining-args');
@@ -17,19 +18,19 @@ const log = new UtLog({
     streams: []
 }).createLog('info', {name: 'create-ut', context: 'create-ut'});
 
-function exec(command, args, options) {
-    const res = childProcess.spawnSync(command, args, options);
+function exec(cmd, args, options) {
+    const res = childProcess.spawnSync(cmd, args, options);
 
     if (res.stderr) console.error(res.stderr.toString().trim());
 
     if (res.error) {
-        console.error('git', 'clone', url, dir, '=>');
+        console.error(cmd, args.join(' '), '=>');
         console.error(res.error);
         return process.exit(1);
     }
 
     if (res.status !== 0) {
-        console.error('git', 'clone', url, dir, '=>', res.status);
+        console.error(cmd, args.join(' '), '=>', res.status);
         return process.exit(1);
     }
 
@@ -40,7 +41,7 @@ const formDataDefaults = [
     {
         alias: ['userName', 'username'],
         value() {
-            return exec('git', ['config', '--get', 'user.email'], {stdio: 'pipe', encoding: 'utf-8'}).split('@')[0]
+            return exec('git', ['config', '--get', 'user.email'], {stdio: 'pipe', encoding: 'utf-8'}).split('@')[0];
         }
     }
 ];
@@ -57,7 +58,7 @@ async function run() {
             .usage('[template] [project-directory] [options...]')
             .action((tmpl = 'app', prjDir = '.') => {
                 const [prefix] = tmpl.split('-');
-                switch(prefix) {
+                switch (prefix) {
                     case 'ms':
                     case 'service':
                         tmpl = tmpl.replace(prefix, 'microservice');
@@ -89,7 +90,7 @@ async function run() {
 
         const {url: { href }, id} = await edit({log});
 
-        childProcess.exec((process.platform == 'win32' ? 'start' : 'xdg-open') + ' ' + href, err => {
+        childProcess.exec((process.platform === 'win32' ? 'start' : 'xdg-open') + ' ' + href, err => {
             if (err) {
                 console.error(err);
                 console.log('Open configuration form at:', href);
@@ -107,13 +108,16 @@ async function run() {
                 replace
                     .flat()
                     .reduce((all, item, i) => all.concat(i % 2 ? [[all.pop(), item]] : item), [])
-                    .forEach(([regExp, value]) => fileContent.replace(regExp, value))
+                    .forEach(([regExp, value]) => fileContent.replace(regExp, value));
+
                 fs.writeFileSync(file, fileContent);
             });
         });
 
+        // exec('git', ['remote', 'set-url', 'origin', 'git@xxx:yyy/zzz.git'], {stdio: 'inherit'})
+
         console.log(`${template} based project has been successfully created in folder ${root}`);
-    } catch(e) {
+    } catch (e) {
         console.error(e);
         process.exit(1);
     }
