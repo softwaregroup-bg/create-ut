@@ -37,54 +37,55 @@ Tool for creating UT microservices and applications
 1) Load a file named `create.js` in the cloned folder, having the following
    structure:
 
-   ```js
-   module.exports = {
-       params: {
-           schema: {
-                properties: {
-                    id: {
-                        type: 'string',
-                        title: 'Package identifier'
-                    },
-                    title: {
-                        type: 'string',
-                        title: 'Package title'
-                    },
-                    userName: {
-                        type: 'string',
-                        title: 'User name',
-                        default: 'based on output from git config --get user.email'
-                    }
+```js
+module.exports = {
+    params: {
+        schema: {
+            properties: {
+                id: {
+                    type: 'string',
+                    title: 'Package identifier'
                 },
-                required: ['id', 'title', 'userName']
-           },
-           uiSchema: {
+                title: {
+                    type: 'string',
+                    title: 'Package title'
+                },
+                userName: {
+                    type: 'string',
+                    title: 'User name',
+                    default: 'based on output from git config --get user.email'
+                }
+            },
+            required: ['id', 'title', 'userName']
+        },
+        uiSchema: {
 
-           }
-       },
-       rename: ({id, title, userName}) => [{
-           files: 'server/**/*.js',
-           replace: [
-               /implementation: 'product'/,
-               `implementation: '${id}'`
-            ]
-       }, {
-           files: 'server/**/*.json',
-           replace: [
-               /"implementation": "product"/,
-               `"implementation": '${id}'`
-           ]
-       }, {
-           files: 'ut_*_rc', // example is for YAML based rc
-           replace: [[
-                /database: impl-firstName-lastName/,
-               `database: impl-${userName.split('.').join('-')}`
-           ],[
-               /user: firstName\.lastName/,
-               `user: ${userName}`
-           ]]
-        } /*etc*/];
-   ```
+        }
+    },
+    rename: ({id, title, userName}) => [{
+        files: 'server/**/*.js',
+        replace: [
+            /implementation: 'product'/,
+            `implementation: '${id}'`
+        ]
+    }, {
+        files: 'server/**/*.json',
+        replace: [
+            /"implementation": "product"/,
+            `"implementation": '${id}'`
+        ]
+    }, {
+        files: 'ut_*_rc', // example is for YAML based rc
+        replace: [[
+            /database: impl-firstName-lastName/,
+            `database: impl-${userName.split('.').join('-')}`
+        ],[
+            /user: firstName\.lastName/,
+            `user: ${userName}`
+        ]]
+    } /*etc*/]
+};
+```
 
 1) Use `ut-form-jsonschema` to create a form based on the `params` property
    in `create.js`.
