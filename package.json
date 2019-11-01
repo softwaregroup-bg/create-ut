@@ -32,6 +32,10 @@
     "ut-form-jsonschema": "^7.1.4",
     "ut-log": "^6.6.1"
   },
+  "devDependencies": {
+    "tap": "^14.9.1",
+    "ut-tools": "^6.28.0"
+  },
   "repository": {
     "type": "git",
     "url": "git@github.com:softwaregroup-bg/create-ut.git"
