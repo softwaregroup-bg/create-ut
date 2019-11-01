@@ -34,6 +34,15 @@ function exec(command, args, options) {
     return res.stdout;
 }
 
+const formDataDefaults = [
+    {
+        alias: ['userName', 'username'],
+        value() {
+            return exec('git', ['config', '--get', 'user.email'], {stdio: 'pipe', encoding: 'utf-8'}).split('@')[0]
+        }
+    }
+];
+
 async function run() {
     let template, dir, root;
 
@@ -67,15 +76,14 @@ async function run() {
 
         exec('git', ['clone', url, dir], {stdio: 'inherit'});
 
-        const create = require(path.join(root, 'create.js'));
+        const {params, rename} = require(path.join(root, 'create.js'));
 
-        if (create.schema.properties.userName) {
-            const userEmail = exec('git', ['config', '--get', 'user.email'], {stdio: 'pipe', encoding: 'utf-8'});
-            create.formSchema = {
-                ...create.formSchema,
-                userName: userEmail.split('@')[0]
-            },
-        }
+        if (!params.formData) params.formData = {};
+
+        formDataDefaults.forEach(({alias, value}) => {
+            const key = alias.find(key => params.schema.properties[key]);
+            if (key && typeof params.formData[key] === 'undefined') params.formData[key] = value();
+        });
 
         const {url: { href }, id} = await edit({log});
 
@@ -102,7 +110,7 @@ async function run() {
             });
         });
 
-        console.log(`${template} based project has been successfully created in folder ${root}!`);
+        console.log(`${template} based project has been successfully created in folder ${root}`);
     } catch(e) {
         console.error(e);
         process.exit(1);
