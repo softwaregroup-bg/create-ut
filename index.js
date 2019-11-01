@@ -1,5 +1,7 @@
 const commander = require('commander');
 const { name, version } = require('./package.json');
+const remainingArgs = require('commander-remaining-args');
+const minimist = require('minimist');
 const packageJson = require('package-json');
 const childProcess = require('child_process');
 const path = require('path');
@@ -50,9 +52,9 @@ async function run() {
         const program = new commander.Command(name)
             .version(version)
             .description('UT generator')
-            .arguments('[template] [project-directory]')
+            .arguments('[template] [project-directory] [options...]')
             .allowUnknownOption()
-            .usage('[template] [project-directory]')
+            .usage('[template] [project-directory] [options...]')
             .action((tmpl = 'app', prjDir = '.') => {
                 const [prefix] = tmpl.split('-');
                 switch(prefix) {
@@ -78,7 +80,7 @@ async function run() {
 
         const {params, rename} = require(path.join(root, 'create.js'));
 
-        if (!params.formData) params.formData = {};
+        params.formData = {...minimist(remainingArgs(program)), ...params.formData};
 
         formDataDefaults.forEach(({alias, value}) => {
             const key = alias.find(key => params.schema.properties[key]);

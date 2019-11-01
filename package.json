@@ -5,11 +5,13 @@
   "main": "index.js",
   "scripts": {},
   "dependencies": {
-    "commander": "3.0.2",
+    "commander": "4.0.0",
+    "commander-remaining-args": "1.2.0",
+    "glob": "7.1.5",
+    "minimist": "1.2.0",
     "package-json": "^6.5.0",
     "ut-form-jsonschema": "^7.1.4",
-    "ut-log": "^6.6.1",
-    "glob": "7.1.5"
+    "ut-log": "^6.6.1"
   },
   "repository": {
     "type": "git",
