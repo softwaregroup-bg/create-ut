@@ -33,7 +33,7 @@
     "ut-log": "^6.6.1"
   },
   "devDependencies": {
-    "tap": "^14.9.1",
+    "tap": "^12.6.2",
     "ut-tools": "^6.28.0"
   },
   "repository": {
