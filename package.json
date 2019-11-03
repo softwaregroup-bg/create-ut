@@ -30,13 +30,15 @@
     "glob": "7.1.2",
     "minimist": "1.2.0",
     "package-json": "6.5.0",
-    "ut-form-jsonschema": "^7.1.4",
-    "ut-log": "^6.6.1"
+    "ut-form-jsonschema": "^7.1.4"
   },
   "devDependencies": {
     "tap": "^12.6.2",
     "ut-tools": "^6.28.0"
   },
+  "bundledDependencies": [
+    "commander", "commander-remaining-args", "glob", "minimist", "package-json", "ut-form-jsonschema"
+  ],
   "repository": {
     "type": "git",
     "url": "git@github.com:softwaregroup-bg/create-ut.git"
