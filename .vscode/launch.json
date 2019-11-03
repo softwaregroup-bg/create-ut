@@ -7,13 +7,13 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
+            "name": "Create application",
             "program": "${workspaceFolder}\\index.js",
             "runtimeArgs": ["--preserve-symlinks", "--nolazy"],
             "env": {
                 "NODE_PATH": "dev"
             },
-            "args": ["api", "test", "--userName=x.y"],
+            "args": ["app", "impl-test-create", "--userName=x.y"],
             "outputCapture": "std"
         }
     ]
