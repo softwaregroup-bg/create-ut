@@ -58,19 +58,21 @@ async function run() {
             .allowUnknownOption()
             .usage('[template] [project-directory] [options...]')
             .action((kind = 'app', prjDir = '.') => {
-                const [prefix] = kind.split('-');
-                switch (prefix) {
+                const parts = kind.split('-');
+                switch (parts[0]) {
                     case 'ms':
                     case 'service':
-                        kind = kind.replace(prefix, 'microservice');
+                    case 'microservice':
+                        parts[0] = 'ut-microservice';
                         break;
                     case 'port':
-                        kind = kind.replace(prefix, 'port-template');
+                        parts[0] = 'ut-port-template';
                         break;
                     default:
+                        parts.unshift('impl');
                         break;
                 }
-                template = 'ut-' + kind;
+                template = parts.join('-');
                 dir = prjDir;
                 root = path.join(process.cwd(), dir);
             })
