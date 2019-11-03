@@ -117,7 +117,7 @@ async function run() {
                     .forEach(params => {
                         newFileContent = newFileContent.replace(...params);
                     });
-                if (newFileContent !== fileContent) fs.writeFileSync(file, fileContent);
+                if (newFileContent !== fileContent) fs.writeFileSync(file, newFileContent);
             });
         });
 
