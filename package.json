@@ -37,7 +37,12 @@
     "ut-tools": "^6.28.0"
   },
   "bundledDependencies": [
-    "commander", "commander-remaining-args", "glob", "minimist", "package-json", "ut-form-jsonschema"
+    "commander",
+    "commander-remaining-args",
+    "glob",
+    "minimist",
+    "package-json",
+    "ut-form-jsonschema"
   ],
   "repository": {
     "type": "git",
