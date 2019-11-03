@@ -112,7 +112,7 @@ async function run() {
                 const fileContent = fs.readFileSync(file, 'utf8');
                 let newFileContent = fileContent;
                 // [regExp1, value1] or [regExp1, value1, regExp2, value2] or [[regExp1, value1], [regExp2, value2]]
-                [].concat(replace)
+                [].concat(...replace)
                     .reduce((all, item, i) => all.concat(i % 2 ? [[all.pop(), item]] : item), [])
                     .forEach(params => {
                         newFileContent = newFileContent.replace(...params);
