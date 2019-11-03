@@ -1,3 +1,12 @@
+# [1.1.0](https://github.com/softwaregroup-bg/create-ut/compare/v1.0.8...v1.1.0) (2019-11-03)
+
+
+### Features
+
+* speed, logging, validation, defaults, docs ([6603581](https://github.com/softwaregroup-bg/create-ut/commit/6603581))
+
+
+
 ## [1.0.8](https://github.com/softwaregroup-bg/create-ut/compare/v1.0.7...v1.0.8) (2019-11-03)
 
 
