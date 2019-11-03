@@ -1,3 +1,12 @@
+## [1.0.7](https://github.com/softwaregroup-bg/create-ut/compare/v1.0.6...v1.0.7) (2019-11-03)
+
+
+### Bug Fixes
+
+* save changed file content ([9ef0d3e](https://github.com/softwaregroup-bg/create-ut/commit/9ef0d3e))
+
+
+
 ## [1.0.6](https://github.com/softwaregroup-bg/create-ut/compare/v1.0.5...v1.0.6) (2019-11-03)
 
 
