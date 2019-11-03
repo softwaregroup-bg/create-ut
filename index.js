@@ -68,6 +68,9 @@ async function run() {
                     case 'port':
                         parts[0] = 'ut-port-template';
                         break;
+                    case 'app':
+                        parts[0] = 'impl-application';
+                        break;
                     default:
                         parts.unshift('impl');
                         break;
