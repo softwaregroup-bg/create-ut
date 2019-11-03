@@ -1,3 +1,12 @@
+## [1.0.6](https://github.com/softwaregroup-bg/create-ut/compare/v1.0.5...v1.0.6) (2019-11-03)
+
+
+### Bug Fixes
+
+* do replace ([943b150](https://github.com/softwaregroup-bg/create-ut/commit/943b150))
+
+
+
 ## [1.0.5](https://github.com/softwaregroup-bg/create-ut/compare/v1.0.4...v1.0.5) (2019-11-03)
 
 
