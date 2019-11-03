@@ -110,13 +110,14 @@ async function run() {
             const list = glob.sync(/^[^/\\].*/.test(files) ? '/' + files : files, { root });
             list.forEach(file => {
                 const fileContent = fs.readFileSync(file, 'utf8');
+                let newFileContent = fileContent;
                 // [regExp1, value1] or [regExp1, value1, regExp2, value2] or [[regExp1, value1], [regExp2, value2]]
-                replace
-                    .flat()
+                [].concat(replace)
                     .reduce((all, item, i) => all.concat(i % 2 ? [[all.pop(), item]] : item), [])
-                    .forEach(([regExp, value]) => fileContent.replace(regExp, value));
-
-                fs.writeFileSync(file, fileContent);
+                    .forEach(params => {
+                        newFileContent = newFileContent.replace(...params);
+                    });
+                if (newFileContent !== fileContent) fs.writeFileSync(file, fileContent);
             });
         });
 
