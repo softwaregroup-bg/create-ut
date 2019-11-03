@@ -1,3 +1,12 @@
+## [1.0.8](https://github.com/softwaregroup-bg/create-ut/compare/v1.0.7...v1.0.8) (2019-11-03)
+
+
+### Bug Fixes
+
+* properly flatten ([7e12180](https://github.com/softwaregroup-bg/create-ut/commit/7e12180))
+
+
+
 ## [1.0.7](https://github.com/softwaregroup-bg/create-ut/compare/v1.0.6...v1.0.7) (2019-11-03)
 
 
