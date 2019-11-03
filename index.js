@@ -57,20 +57,20 @@ async function run() {
             .arguments('[template] [project-directory] [options...]')
             .allowUnknownOption()
             .usage('[template] [project-directory] [options...]')
-            .action((tmpl = 'app', prjDir = '.') => {
-                const [prefix] = tmpl.split('-');
+            .action((kind = 'app', prjDir = '.') => {
+                const [prefix] = kind.split('-');
                 switch (prefix) {
                     case 'ms':
                     case 'service':
-                        tmpl = tmpl.replace(prefix, 'microservice');
+                        kind = kind.replace(prefix, 'microservice');
                         break;
                     case 'port':
-                        tmpl = tmpl.replace(prefix, 'port-template');
+                        kind = kind.replace(prefix, 'port-template');
                         break;
                     default:
                         break;
                 }
-                template = 'ut-' + tmpl;
+                template = 'ut-' + kind;
                 dir = prjDir;
                 root = path.join(process.cwd(), dir);
             })
@@ -80,7 +80,7 @@ async function run() {
 
         exec('git', ['clone', url, dir], {stdio: 'inherit'});
 
-        const {params, rename} = require(path.join(root, 'create.js'));
+        const {params, rename} = require(path.join(root, '.ut-create'));
 
         params.formData = {...minimist(remainingArgs(program)), ...params.formData};
 

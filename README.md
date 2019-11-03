@@ -34,7 +34,7 @@ Tool for creating UT microservices and applications
    }
    ```
 
-1) Load a file named `create.js` in the cloned folder, having the following
+1) Require the modules `.ut-create` in the cloned folder, having the following
    structure:
 
 ```js
