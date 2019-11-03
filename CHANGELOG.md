@@ -1,3 +1,13 @@
+## [1.0.5](https://github.com/softwaregroup-bg/create-ut/compare/v1.0.4...v1.0.5) (2019-11-03)
+
+
+### Bug Fixes
+
+* add app alias ([70eeab0](https://github.com/softwaregroup-bg/create-ut/commit/70eeab0))
+* impl prefix by default ([4babb4b](https://github.com/softwaregroup-bg/create-ut/commit/4babb4b))
+
+
+
 ## [1.0.4](https://github.com/softwaregroup-bg/create-ut/compare/v1.0.3...v1.0.4) (2019-11-03)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "create-ut",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Tool for creating UT microservices and applications",
   "main": "index.js",
   "bin": "index.js",
