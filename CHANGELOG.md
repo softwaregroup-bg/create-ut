@@ -1,3 +1,12 @@
+## [1.1.2](https://github.com/softwaregroup-bg/create-ut/compare/v1.1.1...v1.1.2) (2019-11-04)
+
+
+### Bug Fixes
+
+* workaround npm bug ([6a211d2](https://github.com/softwaregroup-bg/create-ut/commit/6a211d2))
+
+
+
 ## [1.1.1](https://github.com/softwaregroup-bg/create-ut/compare/v1.1.0...v1.1.1) (2019-11-04)
 
 
