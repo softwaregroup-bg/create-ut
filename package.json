@@ -41,8 +41,7 @@
     "commander-remaining-args",
     "glob",
     "minimist",
-    "package-json",
-    "ut-form-jsonschema"
+    "package-json"
   ],
   "repository": {
     "type": "git",
