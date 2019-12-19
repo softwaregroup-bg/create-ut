@@ -58,6 +58,10 @@ async function run() {
             .allowUnknownOption()
             .usage('[template] [project-directory] [options...]')
             .action((kind = 'app', dir = '.') => {
+                if (/^(\w:|\.|\/|\\)/.test(kind)) { // kind is local path to a project
+                    root = path.resolve(kind);
+                    return;
+                }
                 const parts = kind.split('-');
                 root = path.resolve(dir);
                 const prefix = path.basename(root).split('-')[0];
@@ -87,10 +91,14 @@ async function run() {
             })
             .parse(process.argv);
 
-        const {repository: {url}, description} = await packageJson(template, {registryUrl: 'https://nexus.softwaregroup.com/repository/npm-all/'});
-
-        log.debug(`Creating "${description}" in ${root}`);
-        exec('git', ['clone', url, root], {stdio: 'inherit'});
+        let url, description;
+        if (template) { // clone from remote repo
+            const pkg = await packageJson(template, {registryUrl: 'https://nexus.softwaregroup.com/repository/npm-all/'});
+            url = pkg.repository.url;
+            description = pkg.description;
+            log.debug(`Creating "${description}" in ${root}`);
+            exec('git', ['clone', url, root], {stdio: 'inherit'});
+        }
 
         const {params, rename} = require(path.join(root, '.ut-create'));
 
@@ -153,10 +161,11 @@ async function run() {
             });
         });
 
-        log.debug('Setting new remote URL');
-        exec('git', ['remote', 'set-url', 'origin', url.replace(template, path.basename(root))], {stdio: 'inherit', cwd: root});
-
-        log.debug(`${description} based project has been successfully created in folder ${root}`);
+        if (template) { // cloned from remote repo
+            log.debug('Setting new remote URL');
+            exec('git', ['remote', 'set-url', 'origin', url.replace(template, path.basename(root))], {stdio: 'inherit', cwd: root});
+            log.debug(`${description} based project has been successfully created in folder ${root}`);
+        }
     } catch (e) {
         log.error(e);
         process.exit(1);
