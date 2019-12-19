@@ -1,3 +1,12 @@
+## [1.1.3](https://github.com/softwaregroup-bg/create-ut/compare/v1.1.2...v1.1.3) (2019-12-19)
+
+
+### Bug Fixes
+
+* make create-ut work with local repositories ([cf5c175](https://github.com/softwaregroup-bg/create-ut/commit/cf5c175))
+
+
+
 ## [1.1.2](https://github.com/softwaregroup-bg/create-ut/compare/v1.1.1...v1.1.2) (2019-11-04)
 
 
