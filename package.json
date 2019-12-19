@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "tap": "^12.6.2",
-    "ut-tools": "^6.28.0"
+    "ut-tools": "^6.29.11"
   },
   "bundledDependencies": [
     "commander",

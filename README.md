@@ -50,6 +50,12 @@ User creates `application`, `microservice`, `port` or anything else by running:
   npm init ut port[-kind] ut-port-name
   ```
 
+* modify a local repo based on its `.ut-create` definition
+
+  ```bash
+  npm init ut path-to-repo
+  ```
+
 ## Algorithm
 
 1) Clone latest version of package `impl-application[-kind]` or `ut-microservice[-kind]`.
