@@ -28,7 +28,7 @@
     "commander": "4.0.0",
     "commander-remaining-args": "1.2.0",
     "glob": "7.1.2",
-    "minimist": "1.2.0",
+    "minimist": "1.2.2",
     "package-json": "6.5.0",
     "ut-form-jsonschema": "^7.1.4"
   },
