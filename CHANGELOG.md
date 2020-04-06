@@ -1,3 +1,12 @@
+## [1.1.4](https://github.com/softwaregroup-bg/create-ut/compare/v1.1.3...v1.1.4) (2020-04-06)
+
+
+### Bug Fixes
+
+* update minimist ([ef1ba6e](https://github.com/softwaregroup-bg/create-ut/commit/ef1ba6e05d3b1d531313c47501db3a17f7db0bae))
+
+
+
 ## [1.1.3](https://github.com/softwaregroup-bg/create-ut/compare/v1.1.2...v1.1.3) (2019-12-19)
 
 
