@@ -1,3 +1,12 @@
+# [1.2.0](https://github.com/softwaregroup-bg/create-ut/compare/v1.1.11...v1.2.0) (2020-10-26)
+
+
+### Features
+
+* rename files and folders by pattern ([a20b4e7](https://github.com/softwaregroup-bg/create-ut/commit/a20b4e7a42f70890572767f5f6bfec0284863c88))
+
+
+
 ## [1.1.11](https://github.com/softwaregroup-bg/create-ut/compare/v1.1.10...v1.1.11) (2020-10-04)
 
 
