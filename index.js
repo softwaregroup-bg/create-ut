@@ -100,7 +100,7 @@ async function run() {
             exec('git', ['clone', url, root], {stdio: 'inherit'});
         }
 
-        const {params, rename} = require(path.join(root, '.ut-create'));
+        const {params, rename, move} = require(path.join(root, '.ut-create'));
 
         params.formData = {
             id: path.basename(root),
@@ -124,7 +124,8 @@ async function run() {
             }
         });
 
-        const data = await edit({...params,
+        const data = await edit({
+            ...params,
             id,
             log,
             submit: async({payload}) => {
@@ -159,6 +160,12 @@ async function run() {
                     });
                 if (newFileContent !== fileContent) fs.writeFileSync(file, newFileContent);
             });
+        });
+
+        move && move(data).forEach(([files, rename]) => {
+            files && rename && glob
+                .sync(/^[^/\\].*/.test(files) ? '/' + files : files, { root })
+                .forEach(file => fs.renameSync(file, path.join(path.dirname(file), rename(path.basename(file)))));
         });
 
         if (template) { // cloned from remote repo
