@@ -1,3 +1,12 @@
+# [1.3.0](https://github.com/softwaregroup-bg/create-ut/compare/v1.2.1...v1.3.0) (2021-04-07)
+
+
+### Features
+
+* add rename command ([4ff6737](https://github.com/softwaregroup-bg/create-ut/commit/4ff67374996512298a6739816f9130c37d724399))
+
+
+
 ## [1.2.1](https://github.com/softwaregroup-bg/create-ut/compare/v1.2.0...v1.2.1) (2021-03-31)
 
 
