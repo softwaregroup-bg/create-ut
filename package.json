@@ -25,8 +25,7 @@
     "gitlab": "ut-gitlab"
   },
   "dependencies": {
-    "commander": "4.0.0",
-    "commander-remaining-args": "1.2.0",
+    "commander": "7.0.0",
     "glob": "7.1.2",
     "minimist": "1.2.5",
     "package-json": "6.5.0",

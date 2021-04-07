@@ -2,7 +2,6 @@
 /* eslint no-console:0, no-process-exit:0 */
 const commander = require('commander');
 const { name, version } = require('./package.json');
-const remainingArgs = require('commander-remaining-args');
 const minimist = require('minimist');
 const packageJson = require('package-json');
 const childProcess = require('child_process');
@@ -82,6 +81,10 @@ async function run() {
                         title = 'Implementation ' + suffix;
                         parts[0] = 'impl-application';
                         break;
+                    case 'rename':
+                        title = 'Microservice ' + suffix;
+                        parts.length = 0;
+                        break;
                     default:
                         title = 'Module ' + suffix;
                         parts.unshift(prefix);
@@ -105,7 +108,7 @@ async function run() {
         params.formData = {
             id: path.basename(root),
             title,
-            ...minimist(remainingArgs(program)),
+            ...minimist(program.args),
             ...params.formData
         };
 
@@ -114,17 +117,19 @@ async function run() {
             if (key && typeof params.formData[key] === 'undefined') params.formData[key] = value();
         });
 
-        const {url: { href }, id} = await edit({log});
+        const {url: { href } = {}, id} = template && await edit({log});
 
-        log.debug('Opening configuration URL');
-        childProcess.exec((process.platform === 'win32' ? 'start' : 'xdg-open') + ' ' + href, err => {
-            if (err) {
-                log.error(err);
-                log.debug('Open manually configuration form at:', href);
-            }
-        });
+        if (template) {
+            log.debug('Opening configuration URL');
+            childProcess.exec((process.platform === 'win32' ? 'start' : 'xdg-open') + ' ' + href, err => {
+                if (err) {
+                    log.error(err);
+                    log.debug('Open manually configuration form at:', href);
+                }
+            });
+        }
 
-        const data = await edit({
+        const data = !template ? params.formData : await edit({
             ...params,
             id,
             log,
