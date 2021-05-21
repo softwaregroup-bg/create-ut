@@ -1,3 +1,7 @@
+## [1.3.1](https://github.com/softwaregroup-bg/create-ut/compare/v1.3.0...v1.3.1) (2021-05-21)
+
+
+
 # [1.3.0](https://github.com/softwaregroup-bg/create-ut/compare/v1.2.1...v1.3.0) (2021-04-07)
 
 
