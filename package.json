@@ -29,11 +29,10 @@
     "glob": "7.1.2",
     "minimist": "1.2.6",
     "package-json": "6.5.0",
-    "ut-form-jsonschema": "^7.1.4"
+    "ut-form-jsonschema": "^7.1.7"
   },
   "devDependencies": {
-    "tap": "^12.6.2",
-    "ut-tools": "^6.29.11"
+    "tap": "^16.3.0"
   },
   "bundledDependencies": [
     "commander",
