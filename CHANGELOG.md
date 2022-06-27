@@ -1,3 +1,12 @@
+## [1.3.7](https://github.com/softwaregroup-bg/create-ut/compare/v1.3.6...v1.3.7) (2022-06-27)
+
+
+### Bug Fixes
+
+* support node 16 ([6edb388](https://github.com/softwaregroup-bg/create-ut/commit/6edb38872afcde97261324708cc452df6abbc2a6))
+
+
+
 ## [1.3.6](https://github.com/softwaregroup-bg/create-ut/compare/v1.3.5...v1.3.6) (2021-08-15)
 
 
